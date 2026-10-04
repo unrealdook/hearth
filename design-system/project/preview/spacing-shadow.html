@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:var(--surface-0);padding:32px;}
+  .row{display:flex;gap:32px;align-items:flex-start;}
+  .item{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;}
+  .box{width:140px;height:80px;border-radius:var(--r-lg);background:var(--surface-2);}
+  .b1{box-shadow:var(--shadow-overlay);}
+  .b2{box-shadow:var(--shadow-modal);}
+  .b0{border:1px solid var(--border-subtle);}
+  .lbl{font-family:var(--font-mono);font-size:11px;color:var(--fg-2);}
+  .desc{font-family:var(--font-sans);font-size:11px;color:var(--fg-3);text-align:center;max-width:160px;line-height:1.4;}
+</style></head><body>
+  <div class="row">
+    <div class="item"><div class="box b0"></div><div class="lbl">card · border only</div><div class="desc">Cards never use shadow — borders carry weight.</div></div>
+    <div class="item"><div class="box b1"></div><div class="lbl">shadow-overlay</div><div class="desc">Popovers, menus, toasts.</div></div>
+    <div class="item"><div class="box b2"></div><div class="lbl">shadow-modal</div><div class="desc">Modals, top of stack.</div></div>
+  </div>
+</body></html>

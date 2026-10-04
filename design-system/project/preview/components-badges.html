@@ -1,0 +1,29 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:var(--surface-0);padding:24px;font-family:var(--font-sans);}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--r-full);font-size:12px;font-weight:500;line-height:1.5;}
+  .dot{width:6px;height:6px;border-radius:50%;}
+  .paid{background:var(--success-soft);color:var(--success);} .paid .dot{background:var(--success);}
+  .due{background:var(--warning-soft);color:var(--warning);} .due .dot{background:var(--warning);}
+  .over{background:var(--danger-soft);color:var(--danger);} .over .dot{background:var(--danger);}
+  .sched{background:var(--info-soft);color:var(--info);} .sched .dot{background:var(--info);}
+  .auto{background:var(--surface-2);color:var(--fg-2);border:1px solid var(--border-subtle);}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--r-full);font-size:13px;font-weight:500;background:var(--surface-2);color:var(--fg-1);border:1px solid var(--border-subtle);cursor:pointer;}
+  .chip.active{background:var(--ember-700);color:var(--ember-100);border-color:var(--ember-500);}
+</style></head><body>
+  <div class="row">
+    <span class="badge paid"><span class="dot"></span>Paid</span>
+    <span class="badge due"><span class="dot"></span>Due in 3 days</span>
+    <span class="badge over"><span class="dot"></span>Overdue</span>
+    <span class="badge sched"><span class="dot"></span>Scheduled</span>
+    <span class="badge auto">Auto-pay</span>
+  </div>
+  <div class="row">
+    <span class="chip active">All bills</span>
+    <span class="chip">Utilities</span>
+    <span class="chip">Subscriptions</span>
+    <span class="chip">Insurance</span>
+    <span class="chip">Housing</span>
+  </div>
+</body></html>

@@ -1,0 +1,275 @@
+/* ============================================================
+   Hearth Design System — Tokens
+   Dark-first. Every token here assumes a dark canvas.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* -- Color: surfaces (luminance ladder, no tint) ----------- */
+  --surface-0: #0B0C0E;   /* page background */
+  --surface-1: #15171A;   /* cards, panels */
+  --surface-2: #1D2025;   /* popovers, menus, hover state on surface-1 */
+  --surface-3: #262A30;   /* modals, top of stack */
+  --surface-inset: #0E1013; /* recessed wells (inputs, code) */
+
+  /* -- Color: foreground ------------------------------------- */
+  --fg-1: #F2F3F5;   /* primary text, headings */
+  --fg-2: #A8ADB7;   /* secondary text, icons */
+  --fg-3: #6B7280;   /* tertiary, captions, placeholders */
+  --fg-4: #3F4651;   /* disabled, hint */
+
+  /* -- Color: borders (white at low alpha) ------------------- */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  /* -- Color: brand (deep blue) ------------------------------ */
+  --ember-50:  #E8EEFB;
+  --ember-100: #C9D6F4;
+  --ember-200: #8AA6E6;
+  --ember-300: #5A7FD4;
+  --ember-400: #3A5FB8;   /* PRIMARY brand color */
+  --ember-500: #2A4795;
+  --ember-600: #1E3470;
+  --ember-700: #14224C;
+
+  --brand: var(--ember-400);
+  --brand-hover: #4870C7;
+  --brand-press: #2A4795;
+  --brand-fg: #F2F5FA;       /* text on brand */
+
+  /* -- Color: semantic --------------------------------------- */
+  --success: #5BB97F;
+  --success-soft: rgba(91, 185, 127, 0.12);
+  --warning: #E0A24A;
+  --warning-soft: rgba(224, 162, 74, 0.12);
+  --danger: #E26464;
+  --danger-soft: rgba(226, 100, 100, 0.12);
+  --info: #6FA8DC;
+  --info-soft: rgba(111, 168, 220, 0.12);
+
+  /* -- Type: families ---------------------------------------- */
+  --font-sans: 'Inter Tight', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* -- Type: scale (rem-based, 16px root) -------------------- */
+  --text-11: 0.6875rem;  /* eyebrow */
+  --text-12: 0.75rem;    /* caption */
+  --text-13: 0.8125rem;  /* small UI */
+  --text-14: 0.875rem;   /* body S, default UI */
+  --text-16: 1rem;       /* body */
+  --text-18: 1.125rem;   /* body L, section subtitle */
+  --text-20: 1.25rem;    /* h4 */
+  --text-24: 1.5rem;     /* h3 */
+  --text-32: 2rem;       /* h2 */
+  --text-44: 2.75rem;    /* h1 */
+  --text-64: 4rem;       /* display */
+
+  /* -- Type: weights ----------------------------------------- */
+  --w-regular: 400;
+  --w-medium: 500;
+  --w-semibold: 600;
+  --w-bold: 700;
+
+  /* -- Type: line heights ------------------------------------ */
+  --lh-tight: 1.1;
+  --lh-snug: 1.25;
+  --lh-normal: 1.5;
+  --lh-loose: 1.7;
+
+  /* -- Type: tracking ---------------------------------------- */
+  --track-tight: -0.02em;
+  --track-normal: 0;
+  --track-wide: 0.04em;
+  --track-eyebrow: 0.08em;
+
+  /* -- Spacing (4px base) ------------------------------------ */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-14: 56px;
+  --s-18: 72px;
+  --s-24: 96px;
+
+  /* -- Radius ------------------------------------------------ */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+  --r-full: 9999px;
+
+  /* -- Shadow (used only for elevated overlays) -------------- */
+  --shadow-overlay: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-modal: 0 2px 4px rgba(0, 0, 0, 0.4), 0 24px 48px rgba(0, 0, 0, 0.6);
+
+  /* -- Motion ------------------------------------------------ */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur-micro: 180ms;
+  --dur-state: 240ms;
+  --dur-enter: 320ms;
+
+  /* -- Layout ------------------------------------------------ */
+  --layout-max: 1120px;
+  --rail-w: 240px;
+  --topbar-h: 56px;
+
+  /* -- Focus ring -------------------------------------------- */
+  --ring: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-micro: 0ms;
+    --dur-state: 0ms;
+    --dur-enter: 0ms;
+  }
+}
+
+/* ============================================================
+   Semantic type styles — apply via class
+   ============================================================ */
+
+.t-display {
+  font-family: var(--font-sans);
+  font-size: var(--text-64);
+  font-weight: var(--w-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--track-tight);
+  color: var(--fg-1);
+}
+
+.t-h1 {
+  font-family: var(--font-sans);
+  font-size: var(--text-44);
+  font-weight: var(--w-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--track-tight);
+  color: var(--fg-1);
+}
+
+.t-h2 {
+  font-family: var(--font-sans);
+  font-size: var(--text-32);
+  font-weight: var(--w-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--track-tight);
+  color: var(--fg-1);
+}
+
+.t-h3 {
+  font-family: var(--font-sans);
+  font-size: var(--text-24);
+  font-weight: var(--w-semibold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--track-tight);
+  color: var(--fg-1);
+}
+
+.t-h4 {
+  font-family: var(--font-sans);
+  font-size: var(--text-20);
+  font-weight: var(--w-semibold);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+
+.t-body-l {
+  font-family: var(--font-sans);
+  font-size: var(--text-18);
+  font-weight: var(--w-regular);
+  line-height: var(--lh-loose);
+  color: var(--fg-1);
+}
+
+.t-body {
+  font-family: var(--font-sans);
+  font-size: var(--text-16);
+  font-weight: var(--w-regular);
+  line-height: var(--lh-normal);
+  color: var(--fg-1);
+}
+
+.t-body-s {
+  font-family: var(--font-sans);
+  font-size: var(--text-14);
+  font-weight: var(--w-regular);
+  line-height: var(--lh-normal);
+  color: var(--fg-1);
+}
+
+.t-ui {
+  font-family: var(--font-sans);
+  font-size: var(--text-14);
+  font-weight: var(--w-medium);
+  line-height: 1.2;
+  color: var(--fg-1);
+}
+
+.t-caption {
+  font-family: var(--font-sans);
+  font-size: var(--text-12);
+  font-weight: var(--w-regular);
+  line-height: var(--lh-normal);
+  color: var(--fg-2);
+}
+
+.t-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-11);
+  font-weight: var(--w-semibold);
+  line-height: 1;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-14);
+  font-weight: var(--w-regular);
+  font-feature-settings: 'tnum' 1;
+  color: var(--fg-1);
+}
+
+.t-amount {
+  font-family: var(--font-mono);
+  font-size: var(--text-32);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-tight);
+  font-feature-settings: 'tnum' 1;
+  color: var(--fg-1);
+}
+
+/* ============================================================
+   Element defaults
+   ============================================================ */
+
+html, body {
+  background: var(--surface-0);
+  color: var(--fg-1);
+  font-family: var(--font-sans);
+  font-size: var(--text-16);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+::selection { background: var(--ember-400); color: var(--brand-fg); }
+
+/* -- Focus ring rgba (matches new brand) -- */
+:root {
+  --brand-ring: rgba(58, 95, 184, 0.30);
+}
+
+:focus { outline: none; }
+:focus-visible { box-shadow: var(--ring); border-radius: var(--r-sm); }

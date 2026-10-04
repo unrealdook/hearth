@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:var(--surface-0);}
+  .wrap{padding:24px;display:flex;flex-direction:column;gap:8px;}
+  .row{display:flex;align-items:center;gap:16px;}
+  .strip{flex:1;height:1px;}
+  .label{font-family:var(--font-mono);font-size:11px;color:var(--fg-3);min-width:140px;}
+  .demo{height:64px;border-radius:var(--r-md);background:var(--surface-1);display:flex;align-items:center;justify-content:center;font-family:var(--font-sans);font-size:13px;color:var(--fg-2);margin-top:8px;}
+</style></head><body><div class="wrap">
+  <div class="row"><span class="label">border-subtle · 6%</span><div class="strip" style="background:rgba(255,255,255,0.06)"></div></div>
+  <div class="row"><span class="label">border-default · 10%</span><div class="strip" style="background:rgba(255,255,255,0.10)"></div></div>
+  <div class="row"><span class="label">border-strong · 16%</span><div class="strip" style="background:rgba(255,255,255,0.16)"></div></div>
+  <div class="demo" style="border:1px solid var(--border-subtle)">card · border-subtle</div>
+  <div class="demo" style="border:1px solid var(--border-default)">input · border-default</div>
+  <div class="demo" style="border:1px solid var(--border-strong)">emphasized · border-strong</div>
+</div></body></html>

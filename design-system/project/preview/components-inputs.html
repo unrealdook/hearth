@@ -1,0 +1,24 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><link rel="stylesheet" href="../colors_and_type.css"/>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  html,body{margin:0;background:var(--surface-0);padding:24px;font-family:var(--font-sans);}
+  .stack{display:flex;flex-direction:column;gap:14px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  label{font-size:12px;color:var(--fg-2);font-weight:500;}
+  .input{display:flex;align-items:center;gap:8px;background:var(--surface-inset);border:1px solid var(--border-default);border-radius:var(--r-md);padding:0 12px;height:40px;}
+  .input:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px rgba(240,131,58,0.15);}
+  .input input{background:transparent;border:none;outline:none;color:var(--fg-1);font-family:inherit;font-size:14px;flex:1;height:100%;}
+  .input input::placeholder{color:var(--fg-3);}
+  .input [data-lucide]{width:16px;height:16px;color:var(--fg-3);stroke-width:1.75;}
+  .currency{font-family:var(--font-mono);color:var(--fg-3);font-size:14px;}
+  .row{display:flex;gap:12px;}
+  .row .field{flex:1;}
+</style></head><body><div class="stack">
+  <div class="field"><label>Bill name</label><div class="input"><input type="text" value="Pacific Power"/></div></div>
+  <div class="row">
+    <div class="field"><label>Amount</label><div class="input"><span class="currency">$</span><input type="text" value="142.30"/></div></div>
+    <div class="field"><label>Due date</label><div class="input"><i data-lucide="calendar"></i><input type="text" value="May 14, 2026"/></div></div>
+  </div>
+  <div class="field"><label>Search</label><div class="input"><i data-lucide="search"></i><input type="text" placeholder="Find a bill or vendor"/></div></div>
+<script>lucide.createIcons();</script>
+</div></body></html>

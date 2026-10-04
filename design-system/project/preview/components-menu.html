@@ -1,0 +1,31 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><link rel="stylesheet" href="../colors_and_type.css"/>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  html,body{margin:0;background:var(--surface-0);padding:24px;font-family:var(--font-sans);}
+  .menu{background:var(--surface-2);border:1px solid var(--border-default);border-radius:var(--r-lg);padding:6px;width:240px;box-shadow:var(--shadow-overlay);}
+  .item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--r-md);font-size:14px;color:var(--fg-1);cursor:pointer;}
+  .item:hover{background:var(--surface-3);}
+  .item [data-lucide]{width:16px;height:16px;color:var(--fg-2);stroke-width:1.75;}
+  .item .k{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--fg-3);}
+  .sep{height:1px;background:var(--border-subtle);margin:6px 4px;}
+  .danger{color:var(--danger);}
+  .danger [data-lucide]{color:var(--danger);}
+  .layout{display:flex;gap:24px;align-items:flex-start;}
+  .pop{background:var(--surface-2);border:1px solid var(--border-default);border-radius:var(--r-lg);padding:14px 16px;width:240px;box-shadow:var(--shadow-overlay);position:relative;}
+  .pop::before{content:'';position:absolute;top:-6px;left:24px;width:10px;height:10px;background:var(--surface-2);border-left:1px solid var(--border-default);border-top:1px solid var(--border-default);transform:rotate(45deg);}
+  .pop-title{font-size:13px;font-weight:600;color:var(--fg-1);margin-bottom:4px;}
+  .pop-body{font-size:13px;color:var(--fg-2);line-height:1.5;}
+</style></head><body><div class="layout">
+  <div class="menu">
+    <div class="item"><i data-lucide="edit-3"></i>Edit bill<span class="k">⌘E</span></div>
+    <div class="item"><i data-lucide="bell"></i>Set reminder</div>
+    <div class="item"><i data-lucide="copy"></i>Duplicate</div>
+    <div class="sep"></div>
+    <div class="item danger"><i data-lucide="trash-2"></i>Delete</div>
+  </div>
+  <div class="pop">
+    <div class="pop-title">Auto-pay is on</div>
+    <div class="pop-body">We'll pay this 2 days before it's due, from your Chase ··· 4421.</div>
+  </div>
+<script>lucide.createIcons();</script>
+</div></body></html>

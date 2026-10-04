@@ -1,0 +1,199 @@
+/* ============================================================
+   Hearth Design System — Tokens (ported from design-system/project/colors_and_type.css)
+   Dark-first. Every token assumes a dark canvas.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* surfaces (luminance ladder, no tint) */
+  --surface-0: #0B0C0E;
+  --surface-1: #15171A;
+  --surface-2: #1D2025;
+  --surface-3: #262A30;
+  --surface-inset: #0E1013;
+
+  /* foreground */
+  --fg-1: #F2F3F5;
+  --fg-2: #A8ADB7;
+  --fg-3: #6B7280;
+  --fg-4: #3F4651;
+
+  /* borders */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  /* brand (deep blue) */
+  --ember-50:  #E8EEFB;
+  --ember-100: #C9D6F4;
+  --ember-200: #8AA6E6;
+  --ember-300: #5A7FD4;
+  --ember-400: #3A5FB8;
+  --ember-500: #2A4795;
+  --ember-600: #1E3470;
+  --ember-700: #14224C;
+
+  --brand: var(--ember-400);
+  --brand-hover: #4870C7;
+  --brand-press: #2A4795;
+  --brand-fg: #F2F5FA;
+  --brand-ring: rgba(58, 95, 184, 0.30);
+
+  /* semantic */
+  --success: #5BB97F;
+  --success-soft: rgba(91, 185, 127, 0.12);
+  --warning: #E0A24A;
+  --warning-soft: rgba(224, 162, 74, 0.12);
+  --danger: #E26464;
+  --danger-soft: rgba(226, 100, 100, 0.12);
+  --info: #6FA8DC;
+  --info-soft: rgba(111, 168, 220, 0.12);
+
+  /* type */
+  --font-sans: 'Inter Tight', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* type scale */
+  --text-11: 0.6875rem;
+  --text-12: 0.75rem;
+  --text-13: 0.8125rem;
+  --text-14: 0.875rem;
+  --text-16: 1rem;
+  --text-18: 1.125rem;
+  --text-20: 1.25rem;
+  --text-24: 1.5rem;
+  --text-32: 2rem;
+  --text-44: 2.75rem;
+  --text-64: 4rem;
+
+  /* weights */
+  --w-regular: 400;
+  --w-medium: 500;
+  --w-semibold: 600;
+  --w-bold: 700;
+
+  /* line height + tracking */
+  --lh-tight: 1.1;
+  --lh-snug: 1.25;
+  --lh-normal: 1.5;
+  --lh-loose: 1.7;
+  --track-tight: -0.02em;
+  --track-eyebrow: 0.08em;
+
+  /* spacing (4px base) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 20px;
+  --s-6: 24px; --s-8: 32px; --s-10: 40px; --s-14: 56px; --s-18: 72px; --s-24: 96px;
+
+  /* radius */
+  --r-xs: 4px; --r-sm: 6px; --r-md: 8px; --r-lg: 12px; --r-xl: 20px; --r-2xl: 28px; --r-full: 9999px;
+
+  /* shadows — only for elevated overlays */
+  --shadow-overlay: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-modal:   0 2px 4px rgba(0, 0, 0, 0.4), 0 24px 48px rgba(0, 0, 0, 0.6);
+
+  /* motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur-micro: 180ms;
+  --dur-state: 240ms;
+  --dur-enter: 320ms;
+
+  /* layout */
+  --layout-max: 1440px;
+  --rail-w: 240px;
+  --topbar-h: 56px;
+
+  /* focus ring */
+  --ring: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--brand);
+
+  /* tell native form controls (select dropdown, date picker, scrollbar) to use dark UI */
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-micro: 0ms;
+    --dur-state: 0ms;
+    --dur-enter: 0ms;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: var(--surface-0);
+  color: var(--fg-1);
+  font-family: var(--font-sans);
+  font-size: var(--text-16);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--ember-400); color: var(--brand-fg); }
+
+button, input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button { cursor: pointer; }
+
+:focus { outline: none; }
+:focus-visible { box-shadow: var(--ring); border-radius: var(--r-sm); }
+
+input, textarea {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   Type utilities — apply via class
+   ============================================================ */
+
+.t-display {
+  font-size: var(--text-64); font-weight: 700; line-height: var(--lh-tight);
+  letter-spacing: var(--track-tight); color: var(--fg-1);
+}
+.t-h1 { font-size: var(--text-44); font-weight: 700; line-height: var(--lh-tight); letter-spacing: var(--track-tight); color: var(--fg-1); }
+.t-h2 { font-size: var(--text-32); font-weight: 700; line-height: var(--lh-snug); letter-spacing: var(--track-tight); color: var(--fg-1); }
+.t-h3 { font-size: var(--text-24); font-weight: 600; line-height: var(--lh-snug); letter-spacing: var(--track-tight); color: var(--fg-1); }
+.t-h4 { font-size: var(--text-20); font-weight: 600; line-height: var(--lh-snug); color: var(--fg-1); }
+.t-body-l { font-size: var(--text-18); font-weight: 400; line-height: var(--lh-loose); color: var(--fg-1); }
+.t-body { font-size: var(--text-16); font-weight: 400; line-height: var(--lh-normal); color: var(--fg-1); }
+.t-body-s { font-size: var(--text-14); font-weight: 400; line-height: var(--lh-normal); color: var(--fg-1); }
+.t-ui { font-size: var(--text-14); font-weight: 500; line-height: 1.2; color: var(--fg-1); }
+.t-caption { font-size: var(--text-12); font-weight: 400; line-height: var(--lh-normal); color: var(--fg-2); }
+.t-eyebrow {
+  font-size: var(--text-11); font-weight: 600; line-height: 1;
+  letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--fg-2);
+}
+.t-mono {
+  font-family: var(--font-mono); font-size: var(--text-14); font-weight: 400;
+  font-feature-settings: 'tnum' 1; color: var(--fg-1);
+}
+
+/* ============================================================
+   Scrollbar — match the dark canvas
+   ============================================================ */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--surface-0); }
+::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: var(--r-full); border: 2px solid var(--surface-0); }
+::-webkit-scrollbar-thumb:hover { background: var(--surface-3); }
+
+/* ============================================================
+   Animations
+   ============================================================ */
+@keyframes hearth-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hearth-pop-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes hearth-slide-in { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }

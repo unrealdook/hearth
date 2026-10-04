@@ -1,0 +1,25 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:var(--surface-0);padding:24px;font-family:var(--font-sans);}
+  .stack{display:flex;flex-direction:column;gap:14px;}
+  .row{display:flex;gap:14px;align-items:flex-start;}
+  .ex{flex:1;padding:14px 16px;border-radius:var(--r-md);border:1px solid var(--border-subtle);background:var(--surface-1);}
+  .tag{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
+  .tag.yes{color:var(--success);}
+  .tag.no{color:var(--danger);}
+  .text{font-size:14px;color:var(--fg-1);line-height:1.5;}
+  .text.muted{color:var(--fg-3);text-decoration:line-through;}
+</style></head><body><div class="stack">
+  <div class="row">
+    <div class="ex"><div class="tag yes">Voice · do</div><div class="text">Due in 3 days. You've got this.</div></div>
+    <div class="ex"><div class="tag no">Don't</div><div class="text muted">Oops! Something went wrong 😬</div></div>
+  </div>
+  <div class="row">
+    <div class="ex"><div class="tag yes">Money · do</div><div class="text" style="font-family:var(--font-mono)">$ 1,284.00 across 7 bills</div></div>
+    <div class="ex"><div class="tag no">Don't</div><div class="text muted">$1284 across seven obligations</div></div>
+  </div>
+  <div class="row">
+    <div class="ex"><div class="tag yes">Empty · do</div><div class="text">No bills yet. Add your first one.</div></div>
+    <div class="ex"><div class="tag no">Don't</div><div class="text muted">Looks pretty quiet around here!</div></div>
+  </div>
+</div></body></html>

@@ -1,0 +1,9 @@
+# Extra terms the release packager should flag if they appear in source.
+# Copy to personal-terms.txt (gitignored) and add your own — names, your town,
+# your employer, anything you would not want in a public repo.
+#
+# One term per line. Blank lines and # comments are ignored. Case-insensitive.
+
+# Jane Doe
+# Springfield
+# Initech

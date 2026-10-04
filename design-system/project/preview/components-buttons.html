@@ -1,0 +1,25 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><link rel="stylesheet" href="../colors_and_type.css"/>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  html,body{margin:0;background:var(--surface-0);padding:24px;font-family:var(--font-sans);}
+  .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px;}
+  .row:last-child{margin-bottom:0;}
+  button{font-family:inherit;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;border-radius:var(--r-lg);padding:10px 16px;line-height:1;transition:background var(--dur-micro) var(--ease),transform var(--dur-micro) var(--ease);}
+  .primary{background:var(--brand);color:var(--brand-fg);}
+  .primary:hover{background:var(--brand-hover);}
+  .secondary{background:var(--surface-2);color:var(--fg-1);border:1px solid var(--border-default);}
+  .secondary:hover{background:var(--surface-3);}
+  .ghost{background:transparent;color:var(--fg-1);}
+  .ghost:hover{background:var(--surface-2);}
+  .danger{background:transparent;color:var(--danger);border:1px solid var(--border-default);}
+  .danger:hover{background:var(--danger-soft);border-color:var(--danger);}
+  .small{padding:6px 10px;font-size:13px;border-radius:var(--r-md);}
+  .icon-only{padding:8px;}
+  [data-lucide]{width:16px;height:16px;stroke-width:1.75;}
+  .lbl{font-family:var(--font-mono);font-size:11px;color:var(--fg-3);min-width:80px;}
+</style></head><body>
+  <div class="row"><span class="lbl">primary</span><button class="primary">Pay $ 142.30</button><button class="primary"><i data-lucide="plus"></i>Add a bill</button><button class="primary small">Confirm</button></div>
+  <div class="row"><span class="lbl">secondary</span><button class="secondary">Cancel</button><button class="secondary"><i data-lucide="filter"></i>Filter</button><button class="secondary small">Edit</button></div>
+  <div class="row"><span class="lbl">ghost</span><button class="ghost">Skip</button><button class="ghost"><i data-lucide="more-horizontal"></i></button><button class="ghost icon-only"><i data-lucide="search"></i></button></div>
+  <div class="row"><span class="lbl">danger</span><button class="danger">Delete bill</button></div>
+<script>lucide.createIcons();</script></body></html>

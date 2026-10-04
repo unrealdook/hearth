@@ -1,0 +1,20 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html,body{margin:0;background:var(--surface-0);padding:24px;}
+  .stack{display:flex;flex-direction:column;gap:18px;}
+  .row{display:flex;align-items:baseline;gap:18px;}
+  .tag{font-family:var(--font-mono);font-size:11px;color:var(--fg-3);min-width:120px;}
+  table{border-collapse:collapse;width:100%;}
+  td{padding:6px 12px;border-bottom:1px solid var(--border-subtle);font-family:var(--font-mono);font-size:14px;color:var(--fg-1);font-feature-settings:'tnum' 1;}
+  td.lbl{font-family:var(--font-sans);color:var(--fg-2);font-size:13px;}
+  td.amt{text-align:right;}
+</style></head><body><div class="stack">
+  <div class="row"><span class="tag">amount · 32</span><span class="t-amount">$ 1,284.00</span></div>
+  <div class="row"><span class="tag">mono · 14</span><span class="t-mono">Tabular numerals: 0123456789</span></div>
+  <table>
+    <tr><td class="lbl">Electric</td><td class="amt">$ 142.30</td></tr>
+    <tr><td class="lbl">Internet</td><td class="amt">$ 89.00</td></tr>
+    <tr><td class="lbl">Water</td><td class="amt">$ 47.55</td></tr>
+    <tr><td class="lbl">Gas</td><td class="amt">$ 1,005.15</td></tr>
+  </table>
+</div></body></html>

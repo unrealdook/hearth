@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hearth — Web App UI Kit</title>
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  html, body, #root { height: 100%; margin: 0; }
+  body { background: var(--surface-0); color: var(--fg-1); }
+  .app-shell { display: flex; height: 100vh; flex-direction: column; }
+  .app-body { display: flex; flex: 1; min-height: 0; position: relative; }
+  .content {
+    flex: 1; overflow-y: auto;
+    padding: 32px 40px 80px;
+    max-width: 100%;
+  }
+  .content-inner { max-width: 1120px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="Layout.jsx"></script>
+<script type="text/babel" src="BillList.jsx"></script>
+<script type="text/babel" src="Dashboard.jsx"></script>
+<script type="text/babel" src="BillDetail.jsx"></script>
+<script type="text/babel" src="AddBillModal.jsx"></script>
+
+<script type="text/babel">
+const SAMPLE_BILLS = [
+  { id: 1, name: 'Pacific Power',  kind: 'electric',     category: 'Utilities',     status: 'due',   daysUntilDue: 3,  dueDate: 'May 14', amount: 142.30, autoPay: false },
+  { id: 2, name: 'Comcast Xfinity', kind: 'internet',     category: 'Utilities',     status: 'sched', dueDate: 'May 18', amount: 89.00,  autoPay: true  },
+  { id: 3, name: 'Aetna Health',    kind: 'insurance',    category: 'Insurance',     status: 'due',   daysUntilDue: 7,  dueDate: 'May 18', amount: 412.00, autoPay: false },
+  { id: 4, name: 'PG&E Gas',        kind: 'gas',          category: 'Utilities',     status: 'sched', dueDate: 'May 22', amount: 64.20,  autoPay: true  },
+  { id: 5, name: 'Greystar Rent',   kind: 'rent',         category: 'Housing',       status: 'sched', dueDate: 'Jun 01', amount: 2400.00, autoPay: true },
+  { id: 6, name: 'City Water',      kind: 'water',        category: 'Utilities',     status: 'paid',  paidDate: 'May 02', dueDate: 'May 02', amount: 47.55, autoPay: true  },
+  { id: 7, name: 'Netflix',         kind: 'subscription', category: 'Subscriptions', status: 'paid',  paidDate: 'May 01', dueDate: 'May 01', amount: 15.49, autoPay: true  },
+  { id: 8, name: 'AT&T Mobile',     kind: 'phone',        category: 'Utilities',     status: 'paid',  paidDate: 'Apr 28', dueDate: 'Apr 28', amount: 62.00, autoPay: true  },
+  { id: 9, name: 'Spotify',         kind: 'subscription', category: 'Subscriptions', status: 'paid',  paidDate: 'Apr 22', dueDate: 'Apr 22', amount: 11.99, autoPay: true  },
+];
+
+function App() {
+  const [active, setActive] = React.useState('dashboard');
+  const [selected, setSelected] = React.useState(null);
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [bills, setBills] = React.useState(SAMPLE_BILLS);
+
+  const handlePay = (bill) => {
+    setBills(bs => bs.map(b => b.id === bill.id ? { ...b, status: 'paid', paidDate: 'Today' } : b));
+    setSelected(null);
+  };
+
+  const handleAdd = (data) => {
+    if (!data.name) return;
+    setBills(bs => [...bs, {
+      id: Date.now(), name: data.name, kind: 'subscription', category: 'Other',
+      status: data.auto ? 'sched' : 'due', daysUntilDue: 7, dueDate: 'May 14',
+      amount: parseFloat(data.amount) || 0, autoPay: data.auto,
+    }]);
+  };
+
+  return (
+    <div className="app-shell" data-screen-label="App">
+      <TopBar />
+      <div className="app-body">
+        <SideNav active={active} onNavigate={setActive} />
+        <main className="content">
+          <div className="content-inner">
+            {active === 'dashboard' && (
+              <Dashboard bills={bills} onPay={handlePay} onSelect={setSelected} />
+            )}
+            {active === 'bills' && (
+              <BillsView bills={bills} onSelect={setSelected} onAdd={() => setModalOpen(true)} />
+            )}
+            {active === 'calendar' && <CalendarView bills={bills} />}
+            {active === 'accounts' && <AccountsView />}
+            {active === 'reminders' && <RemindersView bills={bills} />}
+            {active === 'settings' && <SettingsView />}
+          </div>
+        </main>
+        {selected && <BillDetail bill={selected} onClose={() => setSelected(null)} onPay={handlePay} />}
+      </div>
+      <AddBillModal open={modalOpen} onClose={() => setModalOpen(false)} onSave={handleAdd} />
+
+      {/* Floating Add button (only on Bills/Dashboard) */}
+      {(active === 'dashboard' || active === 'bills') && (
+        <button
+          onClick={() => setModalOpen(true)}
+          style={{
+            position: 'fixed', bottom: 28, right: 28,
+            width: 56, height: 56, borderRadius: 'var(--r-full)',
+            background: 'var(--brand)', color: 'var(--brand-fg)',
+            border: 'none', cursor: 'pointer', boxShadow: 'var(--shadow-overlay)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+          aria-label="Add a bill"
+        >
+          <Icon name="plus" size={22} stroke={2} />
+        </button>
+      )}
+    </div>
+  );
+}
+
+function BillsView({ bills, onSelect, onAdd }) {
+  const [filter, setFilter] = React.useState('all');
+  const filtered = filter === 'all' ? bills : bills.filter(b => b.category.toLowerCase() === filter);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div>
+          <h1 style={{ fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>Bills</h1>
+          <p style={{ marginTop: 6, color: 'var(--fg-2)', fontSize: 15 }}>{bills.length} bills · $ {bills.reduce((s,b) => s + b.amount, 0).toFixed(2)} this cycle</p>
+        </div>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <Button variant="secondary" size="md" icon="filter">Filter</Button>
+          <Button variant="primary" size="md" icon="plus" onClick={onAdd}>Add a bill</Button>
+        </div>
+      </div>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        {['all', 'utilities', 'insurance', 'housing', 'subscriptions'].map(c => (
+          <Chip key={c} active={filter === c} onClick={() => setFilter(c)}>
+            {c[0].toUpperCase() + c.slice(1)}
+          </Chip>
+        ))}
+      </div>
+      <BillList bills={filtered} onSelect={onSelect} />
+    </div>
+  );
+}
+
+function Chip({ active, children, onClick }) {
+  return (
+    <span onClick={onClick} style={{
+      display: 'inline-flex', alignItems: 'center', padding: '6px 12px',
+      borderRadius: 'var(--r-full)', fontSize: 13, fontWeight: 500,
+      background: active ? 'var(--ember-700)' : 'var(--surface-2)',
+      color: active ? 'var(--ember-100)' : 'var(--fg-1)',
+      border: `1px solid ${active ? 'var(--ember-500)' : 'var(--border-subtle)'}`,
+      cursor: 'pointer',
+    }}>{children}</span>
+  );
+}
+
+function CalendarView({ bills }) {
+  const days = Array.from({ length: 35 }, (_, i) => i - 3);
+  const billsByDay = { 14: bills[0], 18: bills[1], 22: bills[3] };
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <h1 style={{ fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>May 2026</h1>
+      <Card padding={24}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4, marginBottom: 8 }}>
+          {['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => (
+            <div key={d} style={{ fontSize: 11, fontWeight: 600, color: 'var(--fg-3)', textTransform: 'uppercase', letterSpacing: '0.06em', padding: '6px 8px' }}>{d}</div>
+          ))}
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4 }}>
+          {days.map((d, i) => {
+            const valid = d > 0 && d <= 31;
+            const bill = billsByDay[d];
+            return (
+              <div key={i} style={{
+                minHeight: 88, padding: 8, borderRadius: 'var(--r-md)',
+                background: valid ? 'var(--surface-inset)' : 'transparent',
+                border: '1px solid var(--border-subtle)',
+                opacity: valid ? 1 : 0.3,
+              }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-2)' }}>{valid ? d : ''}</div>
+                {bill && (
+                  <div style={{ marginTop: 6, padding: '4px 6px', borderRadius: 4, background: 'var(--ember-700)', color: 'var(--ember-100)', fontSize: 11, fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {bill.name}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+function AccountsView() {
+  const accts = [
+    { name: 'Chase Checking', mask: '4421', balance: 8420.55, primary: true },
+    { name: 'Schwab Checking', mask: '0892', balance: 14200.00, primary: false },
+    { name: 'Apple Card', mask: '7714', balance: -342.10, primary: false },
+  ];
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <h1 style={{ fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>Accounts</h1>
+      <div style={{ display: 'grid', gap: 12 }}>
+        {accts.map(a => (
+          <Card key={a.mask} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <VendorIcon kind="credit" size={44} />
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 15, fontWeight: 500 }}>{a.name}</div>
+              <div style={{ fontSize: 12, color: 'var(--fg-3)', marginTop: 2 }}>··· {a.mask}{a.primary ? ' · Primary' : ''}</div>
+            </div>
+            <Amount value={Math.abs(a.balance)} size="md" muted={a.balance < 0} />
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function RemindersView({ bills }) {
+  const upcoming = bills.filter(b => b.status === 'due');
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <h1 style={{ fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>Reminders</h1>
+      <p style={{ color: 'var(--fg-2)', margin: 0 }}>We'll nudge you 3 days before each bill is due.</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {upcoming.map(b => (
+          <Card key={b.id} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <Icon name="bell" size={20} stroke={1.5} color="var(--brand)" />
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 14, fontWeight: 500 }}>{b.name}</div>
+              <div style={{ fontSize: 12, color: 'var(--fg-3)', marginTop: 2 }}>Due {b.dueDate} · we'll remind you {b.daysUntilDue - 3 <= 0 ? 'today' : `in ${b.daysUntilDue - 3} days`}</div>
+            </div>
+            <Amount value={b.amount} size="sm" muted />
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SettingsView() {
+  const [emailRem, setEmailRem] = React.useState(true);
+  const [pushRem, setPushRem] = React.useState(false);
+  const [autoPay, setAutoPay] = React.useState(true);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 640 }}>
+      <h1 style={{ fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>Settings</h1>
+      <Card padding={0}>
+        <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div style={{ fontSize: 15, fontWeight: 600 }}>Notifications</div>
+        </div>
+        <SettingRow label="Email reminders" desc="3 days before each bill is due" on={emailRem} onChange={setEmailRem} />
+        <SettingRow label="Push notifications" desc="On the day a bill is due" on={pushRem} onChange={setPushRem} />
+      </Card>
+      <Card padding={0}>
+        <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div style={{ fontSize: 15, fontWeight: 600 }}>Payments</div>
+        </div>
+        <SettingRow label="Auto-pay by default" desc="New bills will auto-pay 2 days before due" on={autoPay} onChange={setAutoPay} last />
+      </Card>
+    </div>
+  );
+}
+
+function SettingRow({ label, desc, on, onChange, last }) {
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: 16,
+      padding: '16px 24px',
+      borderBottom: last ? 'none' : '1px solid var(--border-subtle)',
+    }}>
+      <div style={{ flex: 1 }}>
+        <div style={{ fontSize: 14, fontWeight: 500 }}>{label}</div>
+        <div style={{ fontSize: 12, color: 'var(--fg-3)', marginTop: 2 }}>{desc}</div>
+      </div>
+      <Switch on={on} onChange={onChange} />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+</body>
+</html>

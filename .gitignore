@@ -1,0 +1,65 @@
+# ---------------------------------------------------------------
+# Local data — NEVER commit. Whole directories are ignored rather
+# than named files: a rule like "backend/data/finance.db" matches
+# that exact name only, so finance.db.bak-20261004 slips straight
+# past it. Everything in here is ignored; the .gitkeep keeps the
+# empty folder in the repo so a fresh clone has somewhere to write.
+# ---------------------------------------------------------------
+backend/data/*
+!backend/data/.gitkeep
+backend/imports/*
+!backend/imports/.gitkeep
+
+# Belt and braces: a database or backup anywhere is never source.
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+*.bak-*
+*.db.bak*
+
+# Secrets
+.env
+.env.local
+*.key
+*.pem
+
+# Build output / packaged releases
+dist/
+build/
+backend/instance/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Local tooling + scratch
+.claude/
+.hearth-design-temp/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# TS incremental build cache
+*.tsbuildinfo
+
+# Your own packager term list — never ship it
+tools/personal-terms.txt
+
+# Internal project rundown — describes YOUR install, not the software
+PROJECT.md
